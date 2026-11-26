@@ -1,0 +1,134 @@
+% !TEX program = pdflatex
+% Single-file manuscript. Build twice with pdflatex. Author details are intentionally unset.
+\documentclass[11pt,reqno]{amsart}
+\usepackage[a4paper,margin=29mm,top=26mm,bottom=26mm]{geometry}
+\usepackage{amssymb}
+\usepackage[hidelinks,pdfauthor={},pdftitle={Cantor sets of compactly supported Pauli partners}]{hyperref}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\T}{\mathbb T}
+\newcommand{\E}{\mathbb E}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\pa}{\mathcal P}
+\title{Cantor sets of compactly supported Pauli partners}
+\keywords{Pauli problem, Fourier phase retrieval, compact support, digit expansions}
+\subjclass[2020]{42A38, 81P15}
+% \author{...} \address{...} \email{...}
+\begin{document}
+\begin{abstract}
+Shkarin asked whether a Pauli set of functions with bounded supports must be discrete. We construct a Cantor set of unit vectors in \(L^2(\R)\) with position density \(\one_{[0,1]}\) and a common, everywhere positive momentum density. Its members remain distinct modulo constant phase. Each ternary digit contributes an independent choice of phase whose sign disappears upon taking the Fourier modulus. A second construction uses real functions taking only the values \(1\) and \(-1\) on the unit interval. A Cantor subfamily of the real examples remains inequivalent even under reflection and translation.
+\end{abstract}
+\maketitle
+
+\section{The question}
+
+For \(f\in L^1(\R)\cap L^2(\R)\) put
+\[
+ \widehat f(\xi)=\int_{\R} f(x)e^{-2\pi i x\xi}\,dx,
+ \qquad \pa(f)=(|f|^2,|\widehat f|^2).
+\]
+In units consistent with this Fourier convention, \(\pa(f)\) gives the position and momentum probability densities of a normalized wave function. In Fourier optics the same data are the intensities in the object and Fourier planes. A \emph{Pauli set} is a set of at least two functions with identical data such that no two are constant multiples of each other \cite{shkarin}. We identify global phases when comparing states, using the metric
+\[
+ d([f],[g])=\min_{|c|=1}\|f-cg\|_2
+             =\sqrt{2-2|\langle f,g\rangle|}
+\]
+on unit vectors modulo phase. All support statements are in the essential sense.
+
+Shkarin asked whether every Pauli set with bounded supports is discrete and hence countable \cite[Question~5.2 in the preprint]{shkarin}. Total disconnectedness, also discussed there, allows a compact set without isolated points. We realize precisely this possibility within a single fiber of \(\pa\).
+
+\begin{thm}\label{thm:main}
+There is a norm-compact Pauli set \(K\) homeomorphic to the Cantor set, with \(|f|=\one_{[0,1]}\) almost everywhere for every \(f\in K\). The map \(f\mapsto[f]\) embeds \(K\) homeomorphically in the space of pure states, and the common Fourier modulus is positive at every real frequency.
+\end{thm}
+
+Jaming, Kellay and Perez \cite[Theorem~4.3 in the preprint]{jkp} constructed an uncountable wide-band Pauli family by varying signs in a Riesz product. Their frequency-side construction places copies of one packet at unbounded integer translates. In the discussion preceding their theorem they distinguish the earlier band-limited constructions, which give finitely many partners per fixed example; see also \cite{jaming}. Novikov and Xu \cite[Theorem~2]{nx} obtain Pauli partners from finite sums of translated packets. In our construction the choices act at decreasing spatial scales inside a fixed interval. Each scale preserves the Fourier modulus separately, and the choices persist in the \(L^2\) limit.
+
+\section{A product formula on the unit interval}
+
+Let \(b_j\ge2\) be integers, \(B_0=1\) and \(B_n=\prod_{j=1}^n b_j\). On \([0,1)\) use digits \(D_j(x)=\lfloor B_j x\rfloor-b_j\lfloor B_{j-1}x\rfloor\). Prescribing the first \(n\) digits selects one half-open interval of length \(B_n^{-1}\). Thus, for Lebesgue measure on \([0,1)\), the \(D_j\) are independent and \(D_j\) is uniform on \(\{0,\ldots,b_j-1\}\). Write \(X(x)=x\) and \(X_n=\sum_{j\le n}D_j/B_j=\lfloor B_n X\rfloor/B_n\).
+
+\begin{lem}\label{lem:product}
+For each \(j\) let \(w_j:\{0,\ldots,b_j-1\}\to\T\), where \(\T=\{z:|z|=1\}\). Suppose \(W_n=\prod_{j\le n}w_j(D_j)\) converges almost everywhere to \(W\). Extend \(W\) by zero outside \([0,1)\), obtaining \(f\). Then for every real \(\xi\),
+\begin{equation}\label{eq:fourier}
+ \widehat f(\xi)=\lim_{n\to\infty}\prod_{j=1}^n
+ \left(\frac{1}{b_j}\sum_{r=0}^{b_j-1} w_j(r)e^{-2\pi i r\xi/B_j}\right).
+\end{equation}
+For another such choice \(v_j\) defining \(g\), one also has
+\begin{equation}\label{eq:gram}
+ \langle f,g\rangle=\lim_{n\to\infty}\prod_{j=1}^n
+ \left(\frac{1}{b_j}\sum_{r=0}^{b_j-1}w_j(r)\overline{v_j(r)}\right).
+\end{equation}
+\end{lem}
+\begin{proof}
+Independence factors \(\E(W_n e^{-2\pi i\xi X_n})\) into the finite product in \eqref{eq:fourier}. Since \(0\le X-X_n<B_n^{-1}\), the integrands converge almost everywhere to \(W e^{-2\pi i\xi X}\) and have modulus one. Dominated convergence proves the formula. Applying the same argument to the product of the two digit functions, one conjugated, gives \eqref{eq:gram}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Set \(b_j=3,\ a_j=2^{-j}\). For \(\varepsilon\in\{-1,1\}^{\N}\) take the three digit weights \(1,e^{i\varepsilon_j a_j},1\) in that order. The resulting function is
+\[
+ f_\varepsilon(x)=\exp\!\left(i\sum_{j\ge1}
+ \varepsilon_j a_j\one_{\{D_j(x)=1\}}\right)
+ \quad(0\le x<1),
+\]
+extended by zero. Absolute uniform convergence of the phase series gives a unit vector with the stated position modulus. Write \(t_j=2\pi\xi/3^j\). Its \(j\)-th Fourier factor is
+\[
+ m_j^\varepsilon(\xi)
+   =\frac{e^{-it_j}}{3}\big(2\cos t_j+e^{i\varepsilon_j a_j}\big).
+\]
+The term \(2\cos t_j\) is real, so the modulus is independent of \(\varepsilon_j\). Equation~\eqref{eq:fourier} now gives the same modulus at every real \(\xi\) for the entire family. Each factor is nonzero because \(\sin a_j\ne0\). For fixed \(\xi\), the uncentered expression \((1+e^{i\varepsilon_j a_j-it_j}+e^{-2it_j})/3\) gives
+\[
+ |m_j^\varepsilon(\xi)-1|\le a_j/3+|t_j|.
+\]
+The right-hand side is summable. Hence the product of the nonzero factors has a nonzero limit, including at frequencies where early factors may be small.
+
+If \(\varepsilon_k\ne\eta_k\), the \(k\)-th factor in \eqref{eq:gram} has modulus \(|2+e^{2ia_k}|/3<1\), and all other factors have modulus at most one. Thus \(|\langle f_\varepsilon,f_\eta\rangle|<1\), which separates their rays. If two sign sequences agree through \(n\), then
+\[
+ \|f_\varepsilon-f_\eta\|_2\le 2\sum_{j>n}a_j=2^{1-n}.
+\]
+Consequently both maps \(\varepsilon\mapsto f_\varepsilon\) and \(\varepsilon\mapsto[f_\varepsilon]\) are continuous injections from the compact Cantor space to metric spaces. Each is a homeomorphism onto its image. In particular both images have cardinality \(2^{\aleph_0}\) and no isolated points.
+\end{proof}
+
+\section{Real binary phase masks}
+
+A shrinking phase increment makes the ternary construction converge. For a mask with values \(1\) and \(-1\), one can instead make the set on which a digit changes sign progressively smaller. The sign changes matter: Friedman proved that a wave function with a nonnegative representative is Pauli unique \cite[Theorem~1]{friedman}.
+
+\begin{thm}\label{thm:real}
+There is a Cantor set of real unit vectors, supported on \([0,1]\), taking values in \(\{-1,1\}\) almost everywhere on that interval, with identical Pauli data. It contains a Cantor subfamily in which distinct members remain inequivalent under combinations of global phase, translation and reflection.
+\end{thm}
+\begin{proof}
+Take \(b_j=2^{j+2}\) for \(j\ge1\). At level \(j\) choose \(s_j\in\{0,b_j-1\}\) and set \(w_j^s(r)=1-2\one_{\{r=s_j\}}\). The probability of either endpoint digit is \(2/b_j\), with \(\sum_j2/b_j<\infty\). By the first Borel--Cantelli lemma, almost every \(x\) has only finitely many endpoint digits. On this common full-measure set the product \(\prod_j w_j^s(D_j(x))\) stabilizes for every choice \(s\). Call its zero extension \(g_s\).
+
+The two possible lists of real weights at level \(j\) are reverses of each other. If \(M(z)=\sum_{r=0}^{b_j-1}w_j^s(r)z^r\), the reversed polynomial on \(|z|=1\) equals \(z^{b_j-1}\overline{M(z)}\). Their moduli agree, so \eqref{eq:fourier} proves equality of the Fourier moduli for all \(s\). For two choices \(s,u\), the digit weights disagree on exactly two digits at each differing level. Equation~\eqref{eq:gram} yields
+\[
+ \langle g_s,g_u\rangle
+   =\prod_{j:s_j\ne u_j}(1-4/b_j).
+\]
+All factors are positive. The product is strictly less than one if any level differs. Agreement through \(n\) gives
+\[
+ \|g_s-g_u\|_2^2=2(1-\langle g_s,g_u\rangle)
+ \le 8\sum_{j>n}1/b_j.
+\]
+The same compactness argument as before proves the embedding, also modulo global phase.
+
+The common essential support forces a translation preserving it to be the identity and a translated reflection preserving it to be \(x\mapsto1-x\). Except at digit endpoints this reflection sends \(D_j\) to \(b_j-1-D_j\), so it interchanges the two choices at \emph{every} level. Restricting to \(s_1=0\) retains a Cantor set and excludes all such reflected partners by the strict inner-product bound.
+\end{proof}
+
+Fourier transformation gives an equivalent band-limited example. Indeed, \(\widehat{\widehat f}(x)=f(-x)\) in \(L^2\), so the transformed family shares both moduli and has Fourier support \([-1,0]\). The unit-interval aperture also specifies the regularity of these examples. Finite second momentum moment would imply \(f\in H^1(\R)\), hence a continuous representative. This is incompatible with the jump of \(|f|\) at the edge of the aperture. Shkarin's question assumes square integrability and bounded support.
+
+\begin{thebibliography}{9}
+\bibitem{friedman} C. N. Friedman, \emph{Some remarks on Pauli data in quantum mechanics}, J. Austral. Math. Soc. Ser. B \textbf{30} (1989), 298--303.
+\href{https://doi.org/10.1017/S033427000000624X}{doi:10.1017/S033427000000624X}.
+\bibitem{jaming} P. Jaming, \emph{Phase retrieval techniques for radar ambiguity problems}, J. Fourier Anal. Appl. \textbf{5} (1999), 309--329.
+\href{https://doi.org/10.1007/BF01259373}{doi:10.1007/BF01259373}.
+\bibitem{jkp} P. Jaming, K. Kellay and R. Perez III, \emph{Phase retrieval for wide band signals}, J. Fourier Anal. Appl. \textbf{26} (2020), article 54.
+\href{https://doi.org/10.1007/s00041-020-09767-1}{doi:10.1007/s00041-020-09767-1}.
+\href{https://arxiv.org/abs/1905.04095}{arXiv:1905.04095}.
+\bibitem{nx} R. G. Novikov and T. Xu, \emph{On non-uniqueness of phase retrieval for discrete and continuous Fourier transforms}, J. Inverse Ill-Posed Probl. (2026), advance online publication.
+\href{https://doi.org/10.1515/jiip-2026-0119}{doi:10.1515/jiip-2026-0119}. Preprint:
+\href{https://arxiv.org/abs/2604.25662}{arXiv:2604.25662}.
+\bibitem{shkarin} S. Shkarin, \emph{On Pauli pairs}, J. Math. Phys. \textbf{54} (2013), 032102.
+\href{https://doi.org/10.1063/1.4794087}{doi:10.1063/1.4794087}.
+\href{https://arxiv.org/abs/1209.1225}{arXiv:1209.1225}.
+\end{thebibliography}
+\end{document}
